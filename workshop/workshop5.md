@@ -65,8 +65,10 @@ stat /home/user/.docker/config.json: permission denied
 To fix this problem, either remove the ~/.docker/ directory (it is recreated automatically, but any custom settings are lost), or change its ownership and permissions using the following commands:
 
 ```
-$ sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
-$ sudo chmod g+rwx "$HOME/.docker" -R
+sudo chown "$USER":"$USER" /home/"$USER"/.docker -R
+```
+```
+sudo chmod g+rwx "$HOME/.docker" -R
 ```
 
 Relogin your Notebook terminal
@@ -80,12 +82,13 @@ Relogin your Notebook terminal
 1. Clone source code repo from https://github.com/kenken64/reactjs-subdevice.git on the /home/ubuntu (your Slave server). Checkout to the development branch.
 
 ```
-$ git clone https://github.com/kenken64/reactjs-subdevice.git
-
-$ cd reactjs-subdevice
-
-$ git checkout development
-
+git clone https://github.com/kenken64/reactjs-subdevice.git
+```
+```
+cd reactjs-subdevice
+```
+```
+git checkout development
 ```
 
 2. Create a Dockerfile.test under the React App (subsdevices) on the root working directory
@@ -106,21 +109,22 @@ CMD ["npm", "run", "start"]
 3. Build the docker image
 
 ```
-$ docker build -f Dockerfile.test -t kenken64/react-app .
+docker build -f Dockerfile.test -t kenken64/react-app .
 ```
 
 4. Run the docker image as container with port forward and volume mounting, once is up and running. 
 
 ```
-$ docker run -d -p 3000:3000 -v /app/node_modules -v $(pwd):/app kenken64/react-app
+docker run -d -p 3000:3000 -v /app/node_modules -v $(pwd):/app kenken64/react-app
 ```
 
 In order to exit the container , issue the subcommand ps to look for the container id and stop it
 
 ```
-$ docker ps
-
-$ docker stop <container id>
+docker ps
+```
+```
+docker stop <container id>
 ```
 
 5. Create a docker-compose.yml
@@ -148,8 +152,12 @@ docker compose up -d --build
 7. Execute the following command. Implement test on separate container, please replace the placeholder value of the container id on the exec command.
 
 ```
-$ docker ps 
-$ docker exec -it <web container id from docker ps> sh
+docker ps 
+```
+```
+docker exec -it <web container id from docker ps> sh
+```
+```
 # npm run test
 ```
 
@@ -210,19 +218,19 @@ COPY --from=builder /app/build /usr/share/nginx/html
 9. Rebuild and Start the docker container using docker compose, in order to incorporate the test service.
 
 ```
-$ docker compose up -d --build
+docker compose up -d --build
 ```
 
 Check whether the container is up and running by issueing the below command
 
 ```
-$ docker ps
+docker ps
 ```
 
 Once both the services is running stop the container
 
 ```
-$ docker compose stop
+docker compose stop
 
 ```
 
@@ -241,7 +249,7 @@ $ docker run -d -p 80:80 <image id>
 In order check whether the docker is running, list the running container
 
 ```
-$ docker ps
+docker ps
 ```
 
 
@@ -250,8 +258,10 @@ $ docker ps
 13. Remember to register a docker hub account & verify your email before logging to docker hub via the CLI
 
 ```
-$ sudo apt install gnupg2 pass
-$ docker login
+sudo apt install gnupg2 pass
+```
+```
+docker login
 ```
 
 ```
@@ -268,19 +278,19 @@ Login Succeeded
 14. Retrieve the react web docker Id from cli
 
 ```
-$ docker images
+docker images
 ```
 
 15. Tag the react web image
 
 ```
-$ docker tag <docker ps image id> <your dockerhub userid>/subsdevices:v1
+docker tag <docker ps image id> <your dockerhub userid>/subsdevices:v1
 ```
 
 16. Push the tagged image to the docker hub
 
 ```
-$ docker push <your dockerhub userid>/subsdevices:v1
+docker push <your dockerhub userid>/subsdevices:v1
 ```
 
 ```
@@ -298,9 +308,10 @@ v1: digest: sha256:cac661266d1cf19ae4e72f8294e332275a4761a9f5bebe1fd663b1bc3a3c1
 17. Rememer to stop all the container process after you have published the images to the registry.
 
 ```
-$ docker ps 
-
-$ docker stop <container id>
+docker ps 
+```
+```
+docker stop <container id>
 ```
 
 ## Optional workshop (Only on MacOs and Windows)
