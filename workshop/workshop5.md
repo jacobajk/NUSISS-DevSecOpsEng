@@ -51,7 +51,7 @@ source ~/.bashrc
 5. Verify that you can run docker commands without sudo. if you run into permission denied issue when running the below command kindly logout and ssh back to the slave server.
 
 ```
-$ docker run hello-world
+docker run hello-world
 ```
 
 This command downloads a test image and runs it in a container. When the container runs, it prints an informational message and exits.
