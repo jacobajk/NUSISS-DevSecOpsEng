@@ -12,20 +12,22 @@ brew cask install virtualbox
 1. Create docker machines ( to act as nodes for Docker Swarm), one manager as 'namager1 and two workers as 'worker1' and worker2'
 
 ```
-$ docker-machine create --driver virtualbox manager1
-
-$ docker-machine create --driver virtualbox worker1
-
-$ docker-machine create --driver virtualbox worker2
+docker-machine create --driver virtualbox manager1
+```
+```
+docker-machine create --driver virtualbox worker1
+```
+```
+docker-machine create --driver virtualbox worker2
 ```
 
 2. Verify machine created successfully
 
 ```
-
 docker-machine ls
+```
+```
 docker-machine ip <machine name>
-
 ```
 
 3. Initialize the Docker Swarm
@@ -56,7 +58,8 @@ docker swarm join-token worker1
 
 ```
 docker info
-
+```
+```
 docker swarm
 ```
 
@@ -70,7 +73,8 @@ Verify the status of the swarm
 
 ```
 docker service ls
-
+```
+```
 docker service ps serviceName
 ```
 
@@ -86,7 +90,11 @@ docker service scale serviceName=2
 
 ```
 docker node inspect nodename
+```
+```
 docker node inspect self
+```
+```
 docker node inspect worker1
 ```
 
@@ -100,6 +108,8 @@ docker node update --availability drain worker1/worker2
 
 ```
 docker service update --image imagename:version web
+```
+```
 docker service update --image nginx:1.14.0 serviceName
 ```
 
@@ -113,6 +123,10 @@ docker service rm serviceName
 
 ```
 docker swarm leave
+```
+```
 docker-machine stop machineName
+```
+```
 docker-machine rm machineName
 ```
